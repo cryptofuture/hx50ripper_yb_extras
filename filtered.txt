@@ -1,0 +1,229 @@
+1.
+GET 10.0.0.1/scalarwebapi_dd.xml HTTP/1.1
+RESPONSE:
+<?xml version="1.0" encoding="utf-8"?><root xmlns="urn:schemas-upnp-org:device-1-0"><specVersion><major>1</major><minor>0</minor></specVersion><device><deviceType>urn:schemas-upnp-org:device:Basic:1</deviceType><friendlyName>camera</friendlyName><manufacturer>Sony Corporation</manufacturer><manufacturerURL>http://www.sony.com/</manufacturerURL><modelDescription>SonyRemoteCamera</modelDescription><modelName>SonyImagingDevice</modelName><modelURL>http://www.sony.net/</modelURL><serialNumber></serialNumber><UDN>uuid:00000000-0005-0010-8000-fcc2deea75ec</UDN><serviceList><service><serviceType>urn:schemas-sony-com:service:ScalarWebAPI:1</serviceType><serviceId>urn:schemas-sony-com:serviceId:ScalarWebAPI</serviceId><SCPDURL></SCPDURL><controlURL></controlURL><eventSubURL></eventSubURL></service></serviceList><av:X_ScalarWebAPI_DeviceInfo xmlns:av="urn:schemas-sony-com:av"><av:X_ScalarWebAPI_Version>1.0</av:X_ScalarWebAPI_Version><av:X_ScalarWebAPI_ServiceList><av:X_ScalarWebAPI_Service><av:X_ScalarWebAPI_ServiceType>camera</av:X_ScalarWebAPI_ServiceType><av:X_ScalarWebAPI_ActionList_URL>http://10.0.0.1:10000/sony</av:X_ScalarWebAPI_ActionList_URL><av:X_ScalarWebAPI_AccessType /></av:X_ScalarWebAPI_Service></av:X_ScalarWebAPI_ServiceList></av:X_ScalarWebAPI_DeviceInfo></device></root>
+
+2.
+POST 10.0.0.1:10000/camera
+application/json
+{"method":"getVersions","params":[],"id":1,"version":"1.0"}
+RESPONSE:
+200
+{"id":1,"result":[["1.0"]]}
+3.
+POST 10.0.0.1:10000/camera
+application/json
+{"method":"getApplicationInfo","params":[],"id":2,"version":"1.0"}
+RESPONSE:
+200
+{"id":2,"result":["Smart Remote Control","1.0.0"]}
+4.
+POST 10.0.0.1:10000/camera
+application/json
+{"method":"getMethodTypes","params":["1.0"],"id":3,"version":"1.0"}
+RESPONSE:
+200
+{"id":3,"results":[["getMethodTypes",["string"],["string","string*","string*","string"],"1.0"],["getAvailableApiList",[],["string*"],"1.0"],["setShootMode",["string"],["int"],"1.0"],["getShootMode",[],["string"],"1.0"],["getSupportedShootMode",[],["string*"],"1.0"],["getAvailableShootMode",[],["string","string*"],"1.0"],["setFlashMode",["string"],["int"],"1.0"],["getFlashMode",[],["string"],"1.0"],["getSupportedFlashMode",[],["string*"],"1.0"],["getAvailableFlashMode",[],["string","string*"],"1.0"],["setSelfTimer",["int"],["int"],"1.0"],["getSelfTimer",[],["int"],"1.0"],["getSupportedSelfTimer",[],["int*"],"1.0"],["getAvailableSelfTimer",[],["int","int*"],"1.0"],["startLiveview",[],["string"],"1.0"],["stopLiveview",[],["int"],"1.0"],["actTakePicture",[],["string*"],"1.0"],["startMovieRec",[],["int"],"1.0"],["stopMovieRec",[],["string"],"1.0"],["actZoom",["string","string"],["int"],"1.0"],["getApplicationInfo",[],["string","string"],"1.0"],["getVersions",[],["string*"],"1.0"],["receiveEvent",["boolean"],["string","boolean","int","int","int","int","string*","string*","boolean*","string*","string*"],"1.0"]]}
+5.
+POST 10.0.0.1:10000/camera
+application/json
+{"method":"getAvailableApiList","params":[],"id":4,"version":"1.0"}
+RESPONSE:
+200
+{"id":4,"result":[["getMethodTypes","getAvailableApiList","setShootMode","getShootMode","getSupportedShootMode","getAvailableShootMode","setFlashMode","getFlashMode","getSupportedFlashMode","getAvailableFlashMode","setSelfTimer","getSelfTimer","getSupportedSelfTimer","getAvailableSelfTimer","startLiveview","stopLiveview","actTakePicture","startMovieRec","stopMovieRec","actZoom","getApplicationInfo","getVersions","receiveEvent"]]}
+6.
+POST 10.0.0.1:10000/camera
+application/json
+{"method":"receiveEvent","params":[false],"id":5,"version":"1.0"}
+RESPONSE:
+200
+{"id":5,"result":["IDLE",true,0,2,0,0,["setShootMode","setFlashMode","setSelfTimer"],["string","string","int"],[false,false,true],["still","off","0"],["2","still","movie","2","off","auto","3","0","2","10"]]}
+7.
+POST 10.0.0.1:10000/camera
+application/json
+{"method":"getAvailableFlashMode","params":[],"id":6,"version":"1.0"}
+RESPONSE:
+200
+{"id":6,"result":["off",["off","auto"]]}
+8.
+POST 10.0.0.1:10000/camera
+application/json
+{"method":"getAvailableSelfTimer","params":[],"id":7,"version":"1.0"}
+RESPONSE:
+200
+{"id":7,"result":[0,[0,2,10]]}
+9.
+POST 10.0.0.1:10000/camera
+application/json
+{"method":"receiveEvent","params":[true],"id":8,"version":"1.0"}
+RESPONSE:
+200
+{"id":8,"result":["IDLE",true,0,2,0,0,["setShootMode","setFlashMode","setSelfTimer"],["string","string","int"],[false,false,true],["still","off","0"],["2","still","movie","2","off","auto","3","0","2","10"]]}
+10.
+POST 10.0.0.1:10000/camera
+application/json
+{"method":"getAvailableSelfTimer","params":[],"id":9,"version":"1.0"}
+RESPONSE:
+200
+{"id":9,"result":[0,[0,2,10]]}
+11.
+POST 10.0.0.1:10000/camera
+application/json
+{"method":"startLiveview","params":[],"id":10,"version":"1.0"}
+RESPONSE:
+200
+{"id":10,"result":["http://10.0.0.1:60152/liveview.JPG?%211234%21http%2dget%3a%2a%3aimage%2fjpeg%3a%2a%21%21%21%21%21"]}
+12.
+POST 10.0.0.1:10000/camera
+application/json
+{"method":"getAvailableFlashMode","params":[],"id":11,"version":"1.0"}
+RESPONSE:
+200
+{"id":11,"result":["off",["off","auto"]]}
+13.
+POST 10.0.0.1:10000/camera
+application/json
+{"method":"receiveEvent","params":[true],"id":12,"version":"1.0"}
+RESPONSE:
+200
+{"id":12,"result":["StillCapturing",true,0,2,0,0,["setShootMode","setFlashMode","setSelfTimer"],["string","string","int"],[false,false,true],["still","off","0"],["2","still","movie","2","off","auto","3","0","2","10"]]}
+14.
+GET http://10.0.0.1:60152/liveview.JPG?%211234%21http%2dget%3a%2a%3aimage%2fjpeg%3a%2a%21%21%21%21%21
+15.
+POST 10.0.0.1:10000/camera
+application/json
+{"method":"receiveEvent","params":[true],"id":14,"version":"1.0"}
+RESPONSE:
+200
+{"id":14,"result":["StillSaving",true,0,2,0,0,["setShootMode","setFlashMode","setSelfTimer"],["string","string","int"],[false,false,true],["still","off","0"],["2","still","movie","2","off","auto","3","0","2","10"]]}
+16.
+POST 10.0.0.1:10000/camera
+application/json
+{"method":"getAvailableSelfTimer","params":[],"id":15,"version":"1.0"}
+RESPONSE:
+200
+{"id":15,"result":[0,[0,2,10]]}
+17.
+POST 10.0.0.1:10000/camera
+application/json
+{"method":"receiveEvent","params":[true],"id":16,"version":"1.0"}
+RESPONSE:
+200
+{"id":16,"result":["StillSaving",true,0,2,0,0,["setShootMode","setFlashMode","setSelfTimer"],["string","string","int"],[false,false,true],["still","off","0"],["2","still","movie","2","off","auto","3","0","2","10"]]}
+18.
+POST 10.0.0.1:10000/camera
+application/json
+{"method":"getAvailableSelfTimer","params":[],"id":17,"version":"1.0"}
+RESPONSE:
+200
+{"id":17,"result":[0,[0,2,10]]}
+19.
+POST 10.0.0.1:10000/camera
+application/json
+{"method":"receiveEvent","params":[true],"id":18,"version":"1.0"}
+RESPONSE:
+200
+{"id":18,"result":["StillSaving",true,0,2,0,0,["setShootMode","setFlashMode","setSelfTimer"],["string","string","int"],[false,false,true],["still","off","0"],["2","still","movie","2","off","auto","3","0","2","10"]]}
+20.
+POST 10.0.0.1:10000/camera
+application/json
+{"method":"receiveEvent","params":[true],"id":22,"version":"1.0"}
+RESPONSE:
+200
+{"id":22,"result":["StillSaving",false,0,2,0,0,["setShootMode","setFlashMode","setSelfTimer"],["string","string","int"],[false,false,true],["still","off","0"],["2","still","movie","2","off","auto","3","0","2","10"]]}
+21.
+POST 10.0.0.1:10000/camera
+application/json
+{"method":"actTakePicture","params":[],"id":13,"version":"1.0"}
+RESPONSE:
+200
+{"id":13,"result":[["http://10.0.0.1:60152/pict190115_211618.JPG?%211234%21http%2dget%3a%2a%3aimage%2fjpeg%3a%2a%21%21%21%21%21"]]}
+22.
+GET http://10.0.0.1:60152/pict190115_211618.JPG?%211234%21http%2dget%3a%2a%3aimage%2fjpeg%3a%2a%21%21%21%21%21
+23.
+POST 10.0.0.1:10000/camera
+application/json
+{"method":"receiveEvent","params":[true],"id":23,"version":"1.0"}
+RESPONSE:
+200
+{"id":23,"result":["IDLE",false,0,2,0,0,["setShootMode","setFlashMode","setSelfTimer"],["string","string","int"],[false,false,true],["still","off","0"],["2","still","movie","2","off","auto","3","0","2","10"]]}
+24.
+POST 10.0.0.1:10000/camera
+application/json
+{"method":"receiveEvent","params":[true],"id":24,"version":"1.0"}
+RESPONSE:
+200
+{"id":24,"result":["IDLE",false,0,2,0,0,["setShootMode","setFlashMode","setSelfTimer"],["string","string","int"],[false,false,true],["still","off","0"],["2","still","movie","2","off","auto","3","0","2","10"]]}
+25.
+GET http://10.0.0.1:60152/liveview.JPG?%211234%21http%2dget%3a%2a%3aimage%2fjpeg%3a%2a%21%21%21%21%21
+26.
+POST 10.0.0.1:10000/camera
+application/json
+{"method":"receiveEvent","params":[true],"id":28,"version":"1.0"}
+RESPONSE:
+200
+{"id":28,"result":["NotReady",true,0,2,0,0,["setShootMode","setFlashMode","setSelfTimer"],["string","string","int"],[false,false,true],["still","off","0"],["2","still","movie","2","off","auto","3","0","2","10"]]}
+27.
+POST 10.0.0.1:10000/camera
+application/json
+{"method":"receiveEvent","params":[true],"id":35,"version":"1.0"}
+RESPONSE:
+200
+{"id":35,"result":["IDLE",true,0,1,0,0,["setShootMode"],["string"],[false],["movie"],["2","still","movie"]]}
+28.
+POST 10.0.0.1:10000/camera
+application/json
+{"method":"startMovieRec","params":[],"id":38,"version":"1.0"}
+RESPONSE:
+200
+{"id":38,"result":[0]}
+29.
+POST 10.0.0.1:10000/camera
+application/json
+{"method":"stopMovieRec","params":[],"id":42,"version":"1.0"}
+RESPONSE:
+200
+{"id":42,"result":[""]}
+30.
+POST 10.0.0.1:10000/camera
+application/json
+{"method":"setShootMode","params":["still"],"id":46,"version":"1.0"}
+RESPONSE:
+200
+{"id":46,"result":[0]}
+31.
+POST 10.0.0.1:10000/camera
+application/json
+{"method":"receiveEvent","params":[true],"id":47,"version":"1.0"}
+RESPONSE:
+200
+{"id":47,"result":["IDLE",true,0,1,0,0,["setShootMode","setFlashMode","setSelfTimer"],["string","string","int"],[false,false,true],["still","auto","0"],["2","still","movie","2","off","auto","3","0","2","10"]]}
+32.
+POST 10.0.0.1:10000/camera
+application/json
+{"method":"actTakePicture","params":[],"id":53,"version":"1.0"}
+RESPONSE:
+200
+{"id":53,"result":[["http://10.0.0.1:60152/pict190115_211701.JPG?%211234%21http%2dget%3a%2a%3aimage%2fjpeg%3a%2a%21%21%21%21%21"]]}
+33.
+POST 10.0.0.1:10000/camera
+application/json
+{"method":"startLiveview","params":[],"id":68,"version":"1.0"}
+RESPONSE:
+200
+{"id":68,"result":["http://10.0.0.1:60152/liveview.JPG?%211234%21http%2dget%3a%2a%3aimage%2fjpeg%3a%2a%21%21%21%21%21"]}
+34.
+POST 10.0.0.1:10000/camera
+application/json
+{"method":"getAvailableSelfTimer","params":[],"id":73,"version":"1.0"}
+RESPONSE:
+200
+{"error":[1,""],"id":73}
+35.
+POST 10.0.0.1:10000/camera
+application/json
+{"method":"stopMovieRec","params":[],"id":87,"version":"1.0"}
+RESPONSE:
+200
+{"id":87,"result":[""]}
+
